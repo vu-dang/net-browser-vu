@@ -27,7 +27,7 @@ namespace WfBrowser
 
         private Controller Controller;
         private ChromiumWebBrowser Browser;
-        private WebBrowser webBrowser;
+        private WebBrowser WebBrowser;
 
         public FormMain()
         {
@@ -39,6 +39,10 @@ namespace WfBrowser
         public void LoadChrome(string url)
         {
             var settings = new CefSettings();
+            //settings.CefCommandLineArgs.Add("disable-gpu-vsync", "1");
+            settings.CefCommandLineArgs.Add("disable-gpu", "1");
+            settings.CefCommandLineArgs.Add("disable-direct-write", "1");
+
             settings.RegisterScheme(new CefCustomScheme()
             {
                 SchemeName = LocalSchemeHandlerFactory.SchemeName,
@@ -47,12 +51,12 @@ namespace WfBrowser
             Cef.Initialize(settings);
 
             Browser = new ChromiumWebBrowser(url.ToString()) {Dock = DockStyle.Fill};
-            this.Controls.Add(Browser);
+            this.tableLayoutPanel.Controls.Add(Browser,0,0);
         }
 
         public void LoadIe(string url)
         {
-            webBrowser = new WebBrowser()
+            WebBrowser = new WebBrowser()
             {
                 Dock = DockStyle.Fill,
                 AllowNavigation = false,
@@ -60,9 +64,9 @@ namespace WfBrowser
                 ScriptErrorsSuppressed = true,
                 IsWebBrowserContextMenuEnabled = false
             };
-            this.Controls.Add(webBrowser);
+            this.tableLayoutPanel.Controls.Add(WebBrowser,1,0);
             ChangeUserAgent();
-            webBrowser.Navigate(url);
+            WebBrowser.Navigate(url);
         }
 
         public void ChangeUserAgent()

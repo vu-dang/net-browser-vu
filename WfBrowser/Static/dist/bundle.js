@@ -1829,7 +1829,7 @@
 	        var attributeName = propertyInfo.attributeName;
 	        var namespace = propertyInfo.attributeNamespace;
 	        // `setAttribute` with objects becomes only `[object]` in IE8/9,
-	        // ('' + value) makes it output the correct url()-value.
+	        // ('' + value) makes it output the correct toString()-value.
 	        if (namespace) {
 	          node.setAttributeNS(namespace, attributeName, '' + value);
 	        } else if (propertyInfo.hasBooleanValue || propertyInfo.hasOverloadedBooleanValue && value === true) {
@@ -1843,7 +1843,7 @@
 	        // property type before comparing; only `value` does and is string.
 	        if (!propertyInfo.hasSideEffects || '' + node[propName] !== '' + value) {
 	          // Contrary to `setAttribute`, object properties are properly
-	          // `url`ed by IE8/9.
+	          // `toString`ed by IE8/9.
 	          node[propName] = value;
 	        }
 	      }

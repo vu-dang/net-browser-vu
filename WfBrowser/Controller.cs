@@ -22,9 +22,10 @@ namespace WfBrowser
             System.Diagnostics.Process.Start(indexPage);
 
             //load ie-based control
-            //var appDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
-            //var localPage = new Uri(Path.Combine(appDir, @"Static\index.html"));
-            //view.LoadIe(localPage.ToString());
+            var appDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
+            var localPage = new Uri(Path.Combine(appDir, @"Static\index.html"));
+            view.LoadIe(localPage.ToString());
+
 
             //load chrome-based control
             view.LoadChrome(@"local://Static/index.html");
