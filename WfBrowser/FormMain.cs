@@ -23,8 +23,6 @@ namespace WfBrowser
             int dwBufferLength,
             int dwReserved);
 
-        private const int UrlmonOptionUseragent = 0x10000001;
-
         private Controller Controller;
         private ChromiumWebBrowser Browser;
         private WebBrowser WebBrowser;
@@ -38,9 +36,13 @@ namespace WfBrowser
 
         public void LoadChrome(string url)
         {
+            // http://peter.sh/experiments/chromium-command-line-switches/
             var settings = new CefSettings();
-            //settings.CefCommandLineArgs.Add("disable-gpu-vsync", "1");
-            settings.CefCommandLineArgs.Add("disable-gpu", "1");
+            //settings.CefCommandLineArgs.Add("disable-gpu", "1");
+            //settings.CefCommandLineArgs.Add("disable-gpu-compositing", "1");
+
+            settings.CefCommandLineArgs.Add("enable-begin-frame-scheduling", "1");
+            settings.CefCommandLineArgs.Add("disable-gpu-vsync", "1");
             settings.CefCommandLineArgs.Add("disable-direct-write", "1");
 
             settings.RegisterScheme(new CefCustomScheme()
@@ -50,7 +52,7 @@ namespace WfBrowser
             });
             Cef.Initialize(settings);
 
-            Browser = new ChromiumWebBrowser(url.ToString()) {Dock = DockStyle.Fill};
+            Browser = new ChromiumWebBrowser(url) {Dock = DockStyle.Fill};
             this.tableLayoutPanel.Controls.Add(Browser,0,0);
         }
 
@@ -72,10 +74,18 @@ namespace WfBrowser
         public void ChangeUserAgent()
         {
             // http://stackoverflow.com/a/12648705/107625
-            const string ua = @"Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)";
-
             // http://stackoverflow.com/q/937573/107625
-            UrlMkSetSessionOption(UrlmonOptionUseragent, ua, ua.Length, 0);
+
+            //const string ua = @"Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)";
+            //const int UrlmonOptionUseragent = 0x10000001;
+            //UrlMkSetSessionOption(UrlmonOptionUseragent, ua, ua.Length, 0);
+
+            const int URLMON_OPTION_USERAGENT = 0x10000001;
+            const int URLMON_OPTION_USERAGENT_REFRESH = 0x10000002;
+
+            const string ua = @"Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/5.0)";
+            UrlMkSetSessionOption(URLMON_OPTION_USERAGENT_REFRESH, null, 0, 0);
+            UrlMkSetSessionOption(URLMON_OPTION_USERAGENT, ua, ua.Length, 0);
         }
     }
 }

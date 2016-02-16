@@ -15,20 +15,20 @@ namespace WfBrowser
         {
             View = view;
 
-            //load OS browser
-            WebServer = new WebServer();
-            var root = WebServer.StartWebService();
-            var indexPage = root + "/static/index.html";
-            System.Diagnostics.Process.Start(indexPage);
+            //load chrome-based control
+            view.LoadChrome(@"local://Static/index.html");
 
             //load ie-based control
             var appDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
             var localPage = new Uri(Path.Combine(appDir, @"Static\index.html"));
             view.LoadIe(localPage.ToString());
 
+            //load OS browser
+            WebServer = new WebServer();
+            var root = WebServer.StartWebService();
+            var indexPage = root + "/static/index.html";
+            System.Diagnostics.Process.Start(indexPage);
 
-            //load chrome-based control
-            view.LoadChrome(@"local://Static/index.html");
         }
 
     }
