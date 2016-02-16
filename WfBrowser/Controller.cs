@@ -13,15 +13,17 @@ namespace WfBrowser
 
         public Controller(IView view)
         {
-            View = view;
-
-            //load chrome-based control
-            view.LoadChrome(@"local://Static/index.html");
-
+            View = view;    
+            
             //load ie-based control
             var appDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
             var localPage = new Uri(Path.Combine(appDir, @"Static\index.html"));
             view.LoadIe(localPage.ToString());
+            //view.LoadIe("http://html5test.com/");
+
+            //load chrome-based control
+            view.LoadChrome(@"local://Static/index.html");
+            //view.LoadChrome("http://html5test.com/");
 
             //load OS browser
             WebServer = new WebServer();

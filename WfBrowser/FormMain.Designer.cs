@@ -52,6 +52,7 @@
             this.ClientSize = new System.Drawing.Size(1377, 548);
             this.Controls.Add(this.tableLayoutPanel);
             this.Name = "FormMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main";
             this.ResumeLayout(false);
 

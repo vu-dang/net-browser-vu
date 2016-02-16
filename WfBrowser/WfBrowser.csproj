@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CefMenuHandler.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>

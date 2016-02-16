@@ -50,9 +50,10 @@ namespace WfBrowser
                 SchemeName = LocalSchemeHandlerFactory.SchemeName,
                 SchemeHandlerFactory = new LocalSchemeHandlerFactory()
             });
-            Cef.Initialize(settings);
+            Cef.Initialize(settings, true, true);
 
             Browser = new ChromiumWebBrowser(url) { Dock = DockStyle.Fill };
+            Browser.MenuHandler = new CefMenuHandler();
             this.tableLayoutPanel.Controls.Add(Browser, 0, 0);
         }
 
