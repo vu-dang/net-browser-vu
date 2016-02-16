@@ -1,5 +1,7 @@
+/**
+ * Created by Vu on 2016-02-15.
+ */
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 import {Button,Icon,Menu,MenuItem} from 'react-mdl';
 
@@ -21,8 +23,5 @@ var App = React.createClass({
   }
 });
 
-ReactDOM.render(
-  <App />, document.getElementById('content')
-);
+export default App;
 
-//alert('00:version='+navigator.appVersion + ';mode=' + document.documentMode);

@@ -52,8 +52,8 @@ namespace WfBrowser
             });
             Cef.Initialize(settings);
 
-            Browser = new ChromiumWebBrowser(url) {Dock = DockStyle.Fill};
-            this.tableLayoutPanel.Controls.Add(Browser,0,0);
+            Browser = new ChromiumWebBrowser(url) { Dock = DockStyle.Fill };
+            this.tableLayoutPanel.Controls.Add(Browser, 0, 0);
         }
 
         public void LoadIe(string url)
@@ -66,7 +66,7 @@ namespace WfBrowser
                 ScriptErrorsSuppressed = true,
                 IsWebBrowserContextMenuEnabled = false
             };
-            this.tableLayoutPanel.Controls.Add(WebBrowser,1,0);
+            this.tableLayoutPanel.Controls.Add(WebBrowser, 1, 0);
             ChangeUserAgent();
             WebBrowser.Navigate(url);
         }
